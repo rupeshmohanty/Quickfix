@@ -15,10 +15,10 @@ class App extends Component{
         <Router>
           <Switch>
             <Route exact path = '/'>
-              <HomeComponent/>
-            </Route>
-            <Route path = '/login'>
               <LoginComponent/>
+            </Route>
+            <Route path = '/home'>
+              <HomeComponent/>
             </Route>
           </Switch>
         </Router>
