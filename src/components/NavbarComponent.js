@@ -1,4 +1,7 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+
+// importing css files!
 import './css/NavbarComponent.css';
 
 function NavbarComponent(){
@@ -13,10 +16,10 @@ function NavbarComponent(){
                     <div className="collapse navbar-collapse" id="navbarNav">
                         <ul className = "navbar-nav">
                             <li className="nav-item">
-                                <a className = "nav-link active" aria-current="page" href="#">Home</a>
+                                <Link className = "nav-link active" aria-current="page" to = '/home'>Home</Link>
                             </li>
                             <li className="nav-item">
-                                <a className = "nav-link" href="#">Profile</a>
+                                <Link className = "nav-link" to = '/profile'>Profile</Link>
                             </li>
                             <li className="nav-item">
                                 <a className = "nav-link" href="#">Logout</a>

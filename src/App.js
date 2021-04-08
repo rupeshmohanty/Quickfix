@@ -7,6 +7,7 @@ import 'semantic-ui-css/semantic.min.css';
 // importing components
 import HomeComponent from './components/HomeComponent';
 import LoginComponent from './components/LoginComponent';
+import ProfileComponent from './components/ProfileComponent';
 
 class App extends Component{
   render() {
@@ -19,6 +20,9 @@ class App extends Component{
             </Route>
             <Route path = '/home'>
               <HomeComponent/>
+            </Route>
+            <Route path = '/profile'>
+              <ProfileComponent/><br/>
             </Route>
           </Switch>
         </Router>
