@@ -149,7 +149,7 @@ class ProfileComponent extends Component{
                             </div>
                         </div>
                     </form>
-                </div>
+                </div><br/>
             </div>
         )
     }

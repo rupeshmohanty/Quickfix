@@ -8,7 +8,7 @@ import { Container } from 'semantic-ui-react';
 import './css/BlogComponent.css';
 
 // importing images
-import  Welcome  from './Welcome.png';
+import Welcome from './Welcome.png';
 
 // importing components
 import NavbarComponent from './NavbarComponent';
@@ -33,7 +33,7 @@ class HomeComponent extends Component{
             <div className = "home">
                 <NavbarComponent/>
                 <div>
-                    <img src = { Welcome } alt = { Welcome }/>
+                    <img className = "banner" src = { Welcome } alt = { Welcome }/>
                 </div>
                 <Container>
                     <section className = "details-card">
