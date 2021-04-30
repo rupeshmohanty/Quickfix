@@ -1,11 +1,62 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
+import axios from 'axios';
 
 // importing css file!
 import './css/LoginComponent.css';
 
 class LoginComponent extends Component{
+    constructor(props) {
+        super(props);
+        this.onLogin = this.onLogin.bind(this);
+        this.onFieldChange = this.onFieldChange.bind(this);
+
+        this.state = {
+            email: '',
+            password: '',
+            userLoggedIn: '',
+            message: ''
+        }
+    }
+
+    onFieldChange(e) {
+        this.setState({
+            [e.target.name]: e.target.value
+        })
+    }
+
+    onLogin(e) {
+        e.preventDefault();
+
+        const user = {
+            email: this.state.email,
+            password: this.state.password
+        }
+
+        axios.post('http://localhost/Quickfix/login.php', user)
+        .then((res) => {
+            if(res.data.sent) {
+                let responseJson = res.data;
+                if(responseJson) {
+                    sessionStorage.setItem('userData',responseJson.user);
+                    this.setState({
+                        userLoggedIn: true,
+                        message: 'User logged in successfully!'
+                    })
+                }
+            } else {
+                this.setState({
+                    message: res.data.message
+                })
+            }
+        })
+        .catch((error) => console.log(error));
+        
+    }
     render() {
+        if(this.state.userLoggedIn || sessionStorage.getItem('userData')) {
+            return(<Redirect to = {'/home'}/>)
+        }
         return(
             <div className = "login">
                 <div id="login">
@@ -14,15 +65,15 @@ class LoginComponent extends Component{
                         <div id="login-row" className = "row justify-content-center align-items-center">
                             <div id="login-column" className = "col-md-6">
                                 <div id="login-box" className = "col-md-12">
-                                    <form id="login-form" className = "form" action="" method="post">
+                                    <form id="login-form" onSubmit = { this.onLogin } className = "form" method="post">
                                         <h3 className = "text-center text-info">Login</h3>
                                         <div className = "form-group">
                                             <label for="email" className = "text-info">Email</label><br/>
-                                            <input type="email" name="email" id="email" className = "form-control"/>
+                                            <input type="email" name="email" value = { this.state.email } onChange = { this.onFieldChange } id="email" className = "form-control"/>
                                         </div>
                                         <div className = "form-group">
                                             <label for="password" class="text-info">Password:</label><br/>
-                                            <input type="password" name="password" id="password" className = "form-control"/>
+                                            <input type="password" name="password" value = { this.state.password } onChange = { this.onFieldChange } id="password" className = "form-control"/>
                                         </div>
                                         <div className = "row">
                                             <div className = "col-md-6">

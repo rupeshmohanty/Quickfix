@@ -22,7 +22,7 @@ function NavbarComponent(){
                                 <Link className = "nav-link" to = '/profile'>Profile</Link>
                             </li>
                             <li className="nav-item">
-                                <a className = "nav-link" href="#">Logout</a>
+                                <Link className = "nav-link" to = '/logout'>Logout</Link>
                             </li>
                         </ul>
                     </div>

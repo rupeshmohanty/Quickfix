@@ -10,6 +10,7 @@ import LoginComponent from './components/LoginComponent';
 import ProfileComponent from './components/ProfileComponent';
 import RegisterComponent from './components/RegisterComponent';
 import IssueComponent from './components/IssueComponent';
+import LogoutComponent from './components/LogoutComponent';
 
 class App extends Component{
   render() {
@@ -25,6 +26,9 @@ class App extends Component{
             </Route>
             <Route path = '/home'>
               <HomeComponent/>
+            </Route>
+            <Route path = '/logout'>
+              <LogoutComponent/>
             </Route>
             <Route path = '/profile'>
               <ProfileComponent/>
