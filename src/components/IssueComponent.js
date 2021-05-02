@@ -52,6 +52,7 @@ class IssueComponent extends Component{
                 this.setState({
                     message: res.data.message
                 })
+            
             } else {
                 this.setState({
                     message: res.data.message

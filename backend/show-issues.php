@@ -5,11 +5,8 @@
     // include db connection
     include('./db.php');
 
-    // declaring variables
-    $technician = "";
-
     // get details of the issues!
-    $getIssue = "SELECT * FROM `issues` WHERE `technician` = '$technician'";
+    $getIssue = "SELECT * FROM `issue`";
     $getIssueStatus = mysqli_query($conn,$getIssue) or die(mysqli_error($conn));
     $getIssueRow = array();
 
