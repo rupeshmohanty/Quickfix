@@ -111,7 +111,8 @@ class RegisterComponent extends Component{
                                             </div>
                                             <div className = "form-group">
                                                 <label htmlFor="Profession" className = "text-info">Profession</label><br/>
-                                                <select className = "form-control" name = "profession" value = { this.state.profession } onChange = { this.onSelect }>
+                                                <select className = "form-control" name = "profession" onChange = { this.onSelect }>
+                                                    <option value = "">Select an option</option>
                                                     <option value = "Electrician">Electrician</option>
                                                     <option value = "Plumber">Plumber</option>
                                                     <option value = "AC Repair Contractor">AC Repair Contractor</option>

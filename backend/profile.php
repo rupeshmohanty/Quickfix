@@ -6,10 +6,17 @@
     include('./db.php');
 
     // declare variables!
-    $email = $_GET['email'];
+    $email = "";
+
+    // get form data!
+    if(isset($_GET['email'])) {
+
+        $email = $_GET['email'];
+
+    }
 
     // get user details!
-    $getUser = "SELECT * FROM `users` WHERE `email` = '$email'";
+    $getUser = "SELECT `id`, `name`, `userId`, `phone`, `profession`,`createdAt` FROM `users` WHERE `email` = '$email'";
     $getUserStatus = mysqli_query($conn,$getUser) or die(mysqli_error($conn));
     $getUserRow = array();
 
@@ -18,12 +25,16 @@
         while($r = mysqli_fetch_assoc($getUserStatus)) {
             $getUserRow[] = $r;
         }
-
-        echo json_encode(["sent" => true, "user" => $getUserRow]);
+        $status = true;
+        $response = "Profile fetched!";
 
     } else {
 
-        echo json_encode(["sent" => false, "message" => "Unable to fetch the user details!"]);
+        $status = false;
+        $response = "Unable to fetch profile!";
 
     }
+
+    $responseArray = array("status" => $status, "response" => $response,"user" => $getUserRow);
+    echo json_encode($responseArray,JSON_PRETTY_PRINT);
 ?>

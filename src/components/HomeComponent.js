@@ -38,17 +38,6 @@ class HomeComponent extends Component{
 
     render() {
         if(sessionStorage.getItem('userData')) {
-
-            const openBox = () => {
-                var extra = document.getElementById('extra');
-    
-                if(extra.style.display === 'none') {
-                    extra.style.display = 'inline';
-                } else {
-                    extra.style.display = 'none';
-                }
-    
-            }
     
             return(
                 <div className = "home">
@@ -68,13 +57,11 @@ class HomeComponent extends Component{
                                                         <div className="card-desc">
                                                             <h3>{issue.technician}</h3>
                                                             <p>{issue.brief}</p>
-                                                            <div className = "extra" id = "extra" style = {{ display: 'none' }}>
-                                                                <p>{ issue.description }</p>
-                                                                <b>Contact at:</b> <p>{ issue.phone }</p>
-                                                                <b>Address:</b> <p>{ issue.address }</p>
-                                                                <b>Requested by: <p>{ issue.name }</p></b>
-                                                            </div>
-                                                                <Link onClick = { openBox } className = "btn-card">See Details</Link>   
+                                                            <p>{ issue.description }</p>
+                                                            <b>Contact at:</b> <p>{ issue.phone }</p>
+                                                            <b>Address:</b> <p>{ issue.address }</p>
+                                                            <b>Requested by: <p>{ issue.name }</p></b>
+                                                            <Link to = '' className = "btn-card">Solve issue</Link>
                                                         </div>
                                                     </div>
                                                 </div>
