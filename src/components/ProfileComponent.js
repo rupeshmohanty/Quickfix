@@ -17,16 +17,13 @@ class ProfileComponent extends Component{
     }
 
     componentDidMount() {
-        axios.get('http://localhost/Quickfix/profile.php?email='+this.state.email)
+        axios.get('http://127.0.0.1:5000/user/' + this.state.email)
         .then((res) => {
-            console.log(res.data.user[0]);
-            if(res.data.status) {
-                this.setState({
-                    profileData: res.data.user[0]
-                })
-            }
+            this.setState({
+                profileData: res.data.userData
+            })
         })
-        .catch(error => console.log(error));
+        .catch((error) => console.log(error));
     }
 
     render() {

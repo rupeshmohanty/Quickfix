@@ -23,17 +23,28 @@ class HomeComponent extends Component{
             email: sessionStorage.getItem('userData'),
             userLoggedIn: true,
             issue: [],
-            message: ''
+            message: '',
+            userDetails: []
         }
     }
 
     componentDidMount() {
-        axios.get('http://localhost/Quickfix/show-issues.php')
+        // to get the issues!
+        axios.get('http://127.0.0.1:5000/issues')
         .then((res) => {
-            this.setState({
-                issue: res.data
-            })
+            console.log(res.data.issues)
+            if(res.data.status) {
+                this.setState({
+                    issue: res.data.issues,
+                    message: res.data.message
+                })
+            } else {
+                this.setState({
+                    message: res.data.message
+                })
+            }
         })
+        .catch((error) => console.log(error));
     }
 
     render() {
@@ -43,7 +54,7 @@ class HomeComponent extends Component{
                 <div className = "home">
                     <NavbarComponent/>
                     <div>
-                        <img className = "banner" src = { Welcome } alt = { Welcome }/>
+                        <img className = "banner" src = { Welcome } alt = { Welcome } style = {{ width: '100%' }}/>
                     </div>
                     <Container>
                         <section className = "details-card">

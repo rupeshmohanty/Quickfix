@@ -49,9 +49,10 @@ class RegisterComponent extends Component{
         }
 
         console.log(user);
-        axios.post('http://localhost/Quickfix/register.php',user)
+        axios.post('http://127.0.0.1:5000/register',user)
         .then(res => {
-            if(res.data.sent){
+            console.log(res)
+            if(res.data.status){
                 this.setState({
                     userRegistered: true
                 });

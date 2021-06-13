@@ -33,9 +33,9 @@ class LoginComponent extends Component{
             password: this.state.password
         }
 
-        axios.post('http://localhost/Quickfix/login.php', user)
+        axios.post('http://127.0.0.1:5000/login', user)
         .then((res) => {
-            if(res.data.sent) {
+            if(res.data.status) {
                 let responseJson = res.data;
                 if(responseJson) {
                     sessionStorage.setItem('userData',responseJson.user);

@@ -43,23 +43,22 @@ class IssueComponent extends Component{
             phone: this.state.phone,
             address: this.state.address,
             technician: this.state.technician,
-            description: this.state.description,
+            description: this.state.description
         }
 
-        axios.post('http://localhost/Quickfix/post-issue.php',issue)
+        axios.post('http://127.0.0.1:5000/post-an-issue',issue)
         .then((res) => {
-            if(res.data.sent) {
+            if(res.data.status) {
                 this.setState({
                     message: res.data.message
                 })
-            
             } else {
                 this.setState({
                     message: res.data.message
                 })
             }
         })
-        .catch(error => console.log(error));
+        .catch((error) => console.log(error));
     }
 
     render(){
@@ -79,7 +78,7 @@ class IssueComponent extends Component{
                 <div className = "card issue-card mt-4" style = {{ display: 'inline-block' }}>
                     <div className = "card-body">
                         <h3 className = "text-center default-text py-3"><i className = "fa fa-lock"></i> Raise an Issue:</h3>
-                        <form onSubmit = { this.raiseIssue }>
+                        <form onSubmit = { this.raiseIssue } method = "post">
                             <div className = "md-form">
                                 <input type = "text" id = "name" name = "name" value = { this.state.name } onChange = { this.onFieldChange } placeholder = "Your Name" className = "form-control"/>
                             </div>
