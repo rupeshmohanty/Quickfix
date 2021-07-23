@@ -97,6 +97,9 @@ def login():
             responseArray = jsonify(response)
             return responseArray
 
+        else:
+            return not_found()
+
     except Exception as e:
         print(e)
     finally:
@@ -126,6 +129,34 @@ def getUser(email):
         responseArray = jsonify(response)
         return responseArray
 
+    except Exception as e:
+        print(e)
+    finally:
+        cursor.close()
+        conn.close()
+
+# get a particular issue!
+@app.route('/get-issue/<int:id>')
+def getIssueById(id):
+    try:
+        conn = mysql.connect()
+        cursor = conn.cursor(pymysql.cursors.DictCursor)
+        cursor.execute('SELECT * FROM `issue` WHERE `id` = %s',id)
+        issueRow = cursor.fetchone()
+
+        if(len(issueRow) > 0):
+            response = {
+                'status': True,
+                'message': 'User details fetched',
+                'issueData': issueRow 
+            }
+        else:
+            response = {
+                'status': False,
+                'message': 'Unable to find issue!'
+            }
+        responseArray = jsonify(response)
+        return responseArray
     except Exception as e:
         print(e)
     finally:

@@ -82,7 +82,8 @@ class LoginComponent extends Component{
                                                 </div>
                                             </div>
                                         </div>
-                                        <span>If you haven't registered yet, <Link to = '/register'>Register here</Link></span>
+                                        <span>If you haven't registered yet, <Link to = '/register'>Register here</Link></span><br/>
+                                        <span>Not a technician, want to report an issue <Link to = '/raise-an-issue'>Click here</Link></span>
                                     </form>
                                 </div>
                             </div>

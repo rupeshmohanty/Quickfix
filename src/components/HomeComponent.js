@@ -62,6 +62,7 @@ class HomeComponent extends Component{
                                 <div className="row">
                                     { this.state.issue.map((issue) => {
                                         if(issue) {
+                                            const url = '/get-an-issue/' + issue.id;
                                             return(
                                                 <div className="col-md-4">
                                                     <div className="card-content">
@@ -72,7 +73,7 @@ class HomeComponent extends Component{
                                                             <b>Contact at:</b> <p>{ issue.phone }</p>
                                                             <b>Address:</b> <p>{ issue.address }</p>
                                                             <b>Requested by: <p>{ issue.name }</p></b>
-                                                            <Link to = '' className = "btn-card">Solve issue</Link>
+                                                            <Link to = { url } className = "btn-card">Solve issue</Link>
                                                         </div>
                                                     </div>
                                                 </div>

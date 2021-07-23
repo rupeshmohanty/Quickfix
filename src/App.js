@@ -11,6 +11,7 @@ import ProfileComponent from './components/ProfileComponent';
 import RegisterComponent from './components/RegisterComponent';
 import IssueComponent from './components/IssueComponent';
 import LogoutComponent from './components/LogoutComponent';
+import IssueDetails from './components/IssueDetailsComponent';
 
 class App extends Component{
   render() {
@@ -35,6 +36,9 @@ class App extends Component{
             </Route>
             <Route path = '/raise-an-issue'>
               <IssueComponent/>
+            </Route>
+            <Route path = '/get-an-issue/:id'>
+              <IssueDetails/>
             </Route>
           </Switch>
         </Router>
