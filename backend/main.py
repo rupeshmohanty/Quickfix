@@ -106,6 +106,37 @@ def login():
         cursor1.close()
         conn.close()
 
+# change password!
+@app.route('/change-password', methods = ['PUT'])
+def changePassword():
+    try:
+        _json = request.json
+        _email = _json['email']
+        _password = _json['password']
+        
+        #hashing password
+        hashed_password = hashlib.md5(_password.encode()).hexdigest()
+
+        if _email and _password and request.method == 'PUT':
+            conn = mysql.connect()
+            cursor = conn.cursor()
+            cursor.execute("UPDATE users SET password = %s WHERE email = %s",(hashed_password,_email))
+            conn.commit()
+            response = {
+                'status': True,
+                'message': 'Password changed successfully!' 
+            }
+
+            responseArray = jsonify(response)
+            return responseArray
+        else:
+            return not_found()
+    except Exception as e:
+        print(e)
+    finally:
+        cursor.close()
+        conn.close()
+
 # fetching user details!
 @app.route('/user/<string:email>')
 def getUser(email):
@@ -135,6 +166,59 @@ def getUser(email):
         cursor.close()
         conn.close()
 
+# Editing user profile!
+@app.route('/edit-profile', methods=['PUT'])
+def editProfile():
+    try:
+        _json = request.json
+        _email = _json['email']
+        _name = _json['name']
+        _userId = _json['userId']
+        _phone = _json['phone']
+
+        if _email and _name and _userId and _phone and request.method == 'PUT':
+            sqlQuery = "UPDATE users SET name = %s, userId = %s, phone = %s WHERE email = %s"
+            bindData = (_name,_userId,_phone,_email)
+            conn = mysql.connect()
+            cursor = conn.cursor()
+            cursor.execute(sqlQuery,bindData)
+            conn.commit()
+            response = {
+                'status': True,
+                'message': 'User details updated!' 
+            }
+
+            responseArray = jsonify(response)
+            return responseArray
+        else:
+            return not_found()
+
+    except Exception as e:
+        print(e)
+    finally:  
+        cursor.close()
+        conn.close()
+
+# Delete user account!
+@app.route('/delete-user', methods = ['DELETE'])
+def deleteUser():
+    try:
+        conn = mysql.connect()
+        cursor = conn.cursor()
+        # getting email of user!
+        _json = request.json
+        _email = _json['email']
+        cursor.execute("DELETE FROM users WHERE email = %s",_email)
+        conn.commit()
+        response = {
+            'status': True,
+            'message': 'User profile deleted!'
+        }
+    except Exception as e:
+        print(e)
+    finally:
+        # cursor.close()
+        conn.close()
 # get a particular issue!
 @app.route('/get-issue/<int:id>')
 def getIssueById(id):
