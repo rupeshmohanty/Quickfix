@@ -22,6 +22,9 @@ function NavbarComponent(){
                                 <Link className = "nav-link" to = '/profile'>Profile</Link>
                             </li>
                             <li className="nav-item">
+                                <Link className = "nav-link" to = '/change-password'>Change Password</Link>
+                            </li>
+                            <li className="nav-item">
                                 <Link className = "nav-link" to = '/logout'>Logout</Link>
                             </li>
                         </ul>

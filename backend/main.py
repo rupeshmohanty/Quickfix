@@ -179,10 +179,10 @@ def editProfile():
         if _email and _name and _userId and _phone and request.method == 'PUT':
             sqlQuery = "UPDATE users SET name = %s, userId = %s, phone = %s WHERE email = %s"
             bindData = (_name,_userId,_phone,_email)
-            conn = mysql.connect()
-            cursor = conn.cursor()
-            cursor.execute(sqlQuery,bindData)
-            conn.commit()
+            edit_conn = mysql.connect()
+            edit_cursor = edit_conn.cursor()
+            edit_cursor.execute(sqlQuery,bindData)
+            edit_conn.commit()
             response = {
                 'status': True,
                 'message': 'User details updated!' 
@@ -190,35 +190,32 @@ def editProfile():
 
             responseArray = jsonify(response)
             return responseArray
+
+            edit_cursor.close()
+            edit_conn.close()
         else:
             return not_found()
 
     except Exception as e:
         print(e)
-    finally:  
-        cursor.close()
-        conn.close()
 
 # Delete user account!
-@app.route('/delete-user', methods = ['DELETE'])
-def deleteUser():
+@app.route('/delete-user/<string:email>', methods = ['DELETE'])
+def deleteUser(email):
     try:
         conn = mysql.connect()
         cursor = conn.cursor()
-        # getting email of user!
-        _json = request.json
-        _email = _json['email']
-        cursor.execute("DELETE FROM users WHERE email = %s",_email)
+        cursor.execute("DELETE FROM `users` WHERE email = %s",email)
         conn.commit()
         response = {
             'status': True,
             'message': 'User profile deleted!'
         }
+
+        cursor.close()
+        conn.close()
     except Exception as e:
         print(e)
-    finally:
-        # cursor.close()
-        conn.close()
 # get a particular issue!
 @app.route('/get-issue/<int:id>')
 def getIssueById(id):

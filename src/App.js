@@ -12,7 +12,8 @@ import RegisterComponent from './components/RegisterComponent';
 import IssueComponent from './components/IssueComponent';
 import LogoutComponent from './components/LogoutComponent';
 import IssueDetails from './components/IssueDetailsComponent';
-
+import EditComponent from './components/editProfileComponent';
+import PasswordComponent from './components/changePasswordComponent';
 class App extends Component{
   render() {
     return(
@@ -39,6 +40,12 @@ class App extends Component{
             </Route>
             <Route path = '/get-an-issue/:id'>
               <IssueDetails/>
+            </Route>
+            <Route path = '/edit-profile'>
+              <EditComponent/>
+            </Route>
+            <Route path = '/change-password'>
+              <PasswordComponent/>
             </Route>
           </Switch>
         </Router>

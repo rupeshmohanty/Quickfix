@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import { Button, Container } from 'semantic-ui-react';
+import { Link, Redirect } from 'react-router-dom';
 
 // import css file for profile component!
 import './css/ProfileComponent.css';
@@ -12,7 +14,8 @@ class ProfileComponent extends Component{
 
         this.state = {
             email: sessionStorage.getItem('userData'),
-            profileData: []
+            profileData: [],
+            message: ""
         }
     }
 
@@ -27,6 +30,7 @@ class ProfileComponent extends Component{
     }
 
     render() {
+        if(sessionStorage.getItem('userData')) {
         return(
             <div className = "profile">
                 <NavbarComponent/><br/>
@@ -78,7 +82,7 @@ class ProfileComponent extends Component{
                                                         <p>{ this.state.profileData.name }</p>
                                                     </div>
                                                 </div>
-                                                <div clasName = "row">
+                                                <div className = "row">
                                                     <div className = "col-md-6">
                                                         <label>Email</label>
                                                     </div>
@@ -101,7 +105,17 @@ class ProfileComponent extends Component{
                                                     <div className = "col-md-6">
                                                         <p>{ this.state.profileData.profession }</p>
                                                     </div>
-                                                </div>
+                                                </div><br/><br/>
+                                                <Container>
+                                                    <div className = "row">
+                                                        <div className = "col-md-3">
+                                                            <Link to = '/edit-profile'><Button positive>Edit Account</Button></Link>
+                                                        </div>
+                                                        {/* <div className = "col-md-3">
+                                                            <Link to = "/delete-account"><Button negative>Delete Account</Button></Link>
+                                                        </div> */}
+                                                    </div>
+                                                </Container>
                                     </div>
                                     {/* <div className = "tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
                                                 <div className = "row">
@@ -158,6 +172,9 @@ class ProfileComponent extends Component{
                 </div><br/>
             </div>
         )
+        } else {
+            return (<Redirect to = {'/'}/>)
+        }
     }
 
 }
